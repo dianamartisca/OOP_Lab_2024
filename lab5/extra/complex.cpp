@@ -118,20 +118,26 @@ std::ostream& operator<<(std::ostream& out, const Complex& complex)
 
 Complex& operator++(Complex& obj)
 {
-    return obj(obj.real() + 1, obj.imag());
+    obj=obj(obj.real() + 1, obj.imag());
+    return obj;
 }
 
 Complex operator++(Complex& obj, int x)
 {
-    return (++obj);
+    Complex res(obj.real(), obj.imag());
+    obj = (++obj);
+    return res;
 }
 
 Complex& operator--(Complex& obj)
 {
-    return obj(obj.real() - 1, obj.imag());
+    obj = obj(obj.real() - 1, obj.imag());
+    return obj;
 }
 
 Complex operator--(Complex& obj, int x)
 {
-    return (--obj);
+    Complex res(obj.real(), obj.imag());
+    obj = (--obj);
+    return res;
 }
