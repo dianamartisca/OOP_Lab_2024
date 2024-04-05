@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"JsonValue.h"
 #include<iostream>
-#include<cstring>;
+#include<cstring>
 
 NullValue::NullValue()
 {
@@ -73,7 +73,13 @@ ArrayValue::ArrayValue()
 
 ArrayValue::~ArrayValue()
 {
-	delete[] v;
+	unsigned int i;
+	for (i = 0; i < elem; i++)
+	{
+		delete v[i];
+		v[i] = nullptr;
+	}
+	delete [] v;
 	v = nullptr;
 	elem = NULL;
 }
@@ -105,12 +111,22 @@ ArrayValue::operator unsigned()
 
 ObjectValue::ObjectValue()
 {
+	pair_array = new std::pair<char*, JsonValue*>[16];
 	objs = 0;
 }
 
 ObjectValue::~ObjectValue()
 {
+	unsigned int i = 0;
+	for (i = 0; i < objs; i++)
+	{
+		delete [] pair_array[i].first;
+		pair_array[i].first = nullptr;
+		delete pair_array[i].second;
+		pair_array[i].second = nullptr;
+	}
 	delete[] pair_array;
+	pair_array = nullptr;
 	objs = NULL;
 }
 

@@ -62,7 +62,7 @@ public:
 class ObjectValue :public JsonValue
 {
 private:
-    std::pair <char*, JsonValue*> pair_array[16];
+    std::pair <char*, JsonValue*> *pair_array;
     unsigned int objs;
 public:
     ObjectValue();
